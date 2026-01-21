@@ -14,15 +14,62 @@
             margin: 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            overflow: hidden;
         }
         h1 {
             font-size: 3rem;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+        }
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Hello from Assignment 1!</h1>
+    <h1>Hello World! I'm ready to get coding!</h1>
+    <script>
+        function createFirework() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffffff'];
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 50 + Math.random() * 100;
+                particle.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+
+        setInterval(createFirework, 800);
+        createFirework();
+    </script>
 </body>
 </html>
