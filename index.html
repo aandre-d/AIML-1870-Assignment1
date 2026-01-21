@@ -35,16 +35,26 @@
         }
         .name {
             font-size: 5rem;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: bold;
+            animation: rainbow 3s linear infinite;
+        }
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
         }
         .firework {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             animation: explode 1.5s ease-out forwards;
         }
@@ -79,7 +89,7 @@
                 particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
                 const angle = (Math.PI * 2 * i) / 30;
-                const velocity = 50 + Math.random() * 100;
+                const velocity = 100 + Math.random() * 150;
                 particle.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
                 particle.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
 
